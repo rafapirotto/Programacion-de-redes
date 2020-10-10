@@ -1,0 +1,11 @@
+/Users/rafa/progRedes/bin/Debug/netcoreapp2.2/progRedes.deps.json
+/Users/rafa/progRedes/bin/Debug/netcoreapp2.2/progRedes.runtimeconfig.json
+/Users/rafa/progRedes/bin/Debug/netcoreapp2.2/progRedes.runtimeconfig.dev.json
+/Users/rafa/progRedes/bin/Debug/netcoreapp2.2/progRedes.dll
+/Users/rafa/progRedes/bin/Debug/netcoreapp2.2/progRedes.pdb
+/Users/rafa/progRedes/obj/Debug/netcoreapp2.2/progRedes.csprojAssemblyReference.cache
+/Users/rafa/progRedes/obj/Debug/netcoreapp2.2/progRedes.csproj.CoreCompileInputs.cache
+/Users/rafa/progRedes/obj/Debug/netcoreapp2.2/progRedes.AssemblyInfoInputs.cache
+/Users/rafa/progRedes/obj/Debug/netcoreapp2.2/progRedes.AssemblyInfo.cs
+/Users/rafa/progRedes/obj/Debug/netcoreapp2.2/progRedes.dll
+/Users/rafa/progRedes/obj/Debug/netcoreapp2.2/progRedes.pdb

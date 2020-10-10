@@ -1,0 +1,51 @@
+using System;
+using Protocol;
+
+namespace Server
+{
+    public class Router
+    {
+
+        private readonly ServerController serverController;
+
+        public Router(ServerController serverController)
+        {
+            this.serverController = serverController;
+        }
+
+        public void Handle(Connection conn)
+        {
+            while (conn.IsConnected())
+            {
+                try
+                {
+                    string[] message = conn.ReadMessage();
+                    var request = new Request(message);
+
+                    switch (request.Command)
+                    {
+                        case Command.Login:
+                            serverController.ConnectClient(conn, request);
+                            break;
+                        case Command.ListAllSubjects:
+                            serverController.ListAllSubjects(conn, request);
+                            break;
+                        case Command.DisconnectClient:
+                            serverController.DisconnectClient(conn, request);
+                            break;
+                        default:
+                            serverController.InvalidCommand(conn);
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    conn.SendMessage(new string[] { ResponseCode.InternalServerError.ToString(), "There was a problem with the server" });
+                    break;
+                }
+            }
+        }
+
+    }
+
+}

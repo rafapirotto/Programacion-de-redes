@@ -1,0 +1,9 @@
+/Users/rafa/progRedes/aulas/Protocol/bin/Debug/netstandard2.0/Protocol.deps.json
+/Users/rafa/progRedes/aulas/Protocol/bin/Debug/netstandard2.0/Protocol.dll
+/Users/rafa/progRedes/aulas/Protocol/bin/Debug/netstandard2.0/Protocol.pdb
+/Users/rafa/progRedes/aulas/Protocol/obj/Debug/netstandard2.0/Protocol.csprojAssemblyReference.cache
+/Users/rafa/progRedes/aulas/Protocol/obj/Debug/netstandard2.0/Protocol.csproj.CoreCompileInputs.cache
+/Users/rafa/progRedes/aulas/Protocol/obj/Debug/netstandard2.0/Protocol.AssemblyInfoInputs.cache
+/Users/rafa/progRedes/aulas/Protocol/obj/Debug/netstandard2.0/Protocol.AssemblyInfo.cs
+/Users/rafa/progRedes/aulas/Protocol/obj/Debug/netstandard2.0/Protocol.dll
+/Users/rafa/progRedes/aulas/Protocol/obj/Debug/netstandard2.0/Protocol.pdb

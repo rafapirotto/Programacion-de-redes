@@ -1,0 +1,14 @@
+/Users/rafa/progRedes/aulas/UI/bin/Debug/netstandard2.0/UI.deps.json
+/Users/rafa/progRedes/aulas/UI/bin/Debug/netstandard2.0/UI.dll
+/Users/rafa/progRedes/aulas/UI/bin/Debug/netstandard2.0/UI.pdb
+/Users/rafa/progRedes/aulas/UI/bin/Debug/netstandard2.0/Entities.dll
+/Users/rafa/progRedes/aulas/UI/bin/Debug/netstandard2.0/Entities.pdb
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.csprojAssemblyReference.cache
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.Resources.resources
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.csproj.GenerateResource.cache
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.csproj.CoreCompileInputs.cache
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.AssemblyInfoInputs.cache
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.AssemblyInfo.cs
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.csproj.CopyComplete
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.dll
+/Users/rafa/progRedes/aulas/UI/obj/Debug/netstandard2.0/UI.pdb

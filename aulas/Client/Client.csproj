@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+<ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="2.0.0-preview2-26406-04" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\Protocol\Protocol.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+    </ProjectReference>
+    </ItemGroup>
+
+</Project>

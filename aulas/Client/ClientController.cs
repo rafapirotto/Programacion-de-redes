@@ -1,0 +1,161 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using Protocol;
+using UI;
+
+namespace Client {
+    public class ClientController {
+
+        private const double WaitTimeAumentation = 1.5;
+        private const int InitialWaitTime = 100;
+        private readonly ClientProtocol clientProtocol;
+        private string clientToken;
+        private string clientUsername;
+        private Connection SocketConnection { get; set; }
+        private Connection TimeControllerConnection { get; set; }
+        private bool timesOut = false;
+        private bool exitAulas = false;
+
+        public ClientController () {
+            clientToken = "";
+            clientUsername = null;
+            string serverIp = GetServerIp ();
+            int serverPort = GetServerPort ();
+            string clientIp = GetClientIp ();
+            int clientPort = GetClientPort ();
+            clientProtocol = new ClientProtocol (serverIp, serverPort, clientIp, clientPort);
+        }
+
+        internal void LoopMenu () {
+            Init ();
+            bool exit = false;
+            while (!exit) {
+                Console.WriteLine (ClientUI.Title (clientUsername));
+                int option = Menus.ClientControllerLoopMenu ();
+                if (option == 4)exit = true;
+                MapOptionToActionOfMainMenu (option);
+                if (!exitAulas) {
+                    ClientUI.Clear ();
+                }
+                if (exitAulas) {
+                    ClientUI.ClearBoard ();
+                }
+                exitAulas = false;
+            }
+        }
+
+        public void DisconnectFromServer () {
+            SocketConnection.SendMessage (BuildRequest (Command.DisconnectClient));
+            var response = new Response (SocketConnection.ReadMessage ());
+            if (response.HadSuccess ()) {
+                Console.WriteLine ("Disconnected");
+                Environment.Exit (1);
+            } else {
+                Console.WriteLine (response.ErrorMessage ());
+            }
+        }
+
+        private void Init () {
+            Console.WriteLine (ClientUI.Title ());
+            ConnectToServer ();
+            ClientUI.Clear ();
+        }
+
+        private void MapOptionToActionOfMainMenu (int option) {
+            switch (option) {
+                case 2:
+                    GetListOfAllSubjects ();
+                    break;
+                case 5:
+                    DisconnectFromServer ();
+                    break;
+
+            }
+
+        }
+
+        private List<string> GetListOfAllSubjects () {
+            var clients = new List<string> ();
+            object[] request = BuildRequest (Command.ListAllSubjects);
+            SocketConnection.SendMessage (request);
+
+            var response = new Response (SocketConnection.ReadMessage ());
+            if (response.HadSuccess ()) {
+                clients = response.UserList ();
+            }
+
+            return clients;
+        }
+
+        private void ConnectToServer () {
+            Console.WriteLine (ClientUI.Connecting ());
+            bool connected;
+            do {
+                Entities.Client client = AskForCredentials ();
+                SocketConnection = clientProtocol.ConnectToServer ();
+                object[] request = BuildRequest (Command.Login, client.Username, client.Password);
+                SocketConnection.SendMessage (request);
+                var response = new Response (SocketConnection.ReadMessage ());
+                connected = response.HadSuccess ();
+                if (connected) {
+                    clientToken = response.GetClientToken ();
+                    clientUsername = client.Username;
+                    ClientUI.LoginSuccessful ();
+                } else {
+                    Console.WriteLine (response.ErrorMessage ());
+                }
+            } while (!connected);
+        }
+
+        private string GetServerIp () {
+            return "192.168.2.60";
+            //var appSettings = new AppSettingsReader();
+            //return (string)appSettings.GetValue("ServerIp", typeof(string));
+        }
+
+        private int GetServerPort () {
+            return 4013;
+            //var appSettings = new AppSettingsReader();
+            //return (int)appSettings.GetValue("ServerPort", typeof(int));
+        }
+
+        private string GetClientIp () {
+            return "192.168.2.60";
+            //var appSettings = new AppSettingsReader();
+            //return (string)appSettings.GetValue("ClientIp", typeof(string));
+        }
+
+        private int GetClientPort () {
+            return 4014;
+            //var appSettings = new AppSettingsReader();
+            //return (int)appSettings.GetValue("ClientPort", typeof(int));
+        }
+
+        private Entities.Client AskForCredentials () {
+            ClientUI.LoginTitle ();
+
+            ClientUI.InsertUsername ();
+            string username = Input.RequestUsernameAndPassword ("Insert Username: ");
+
+            ClientUI.InsertPassword ();
+            string password = Input.RequestUsernameAndPassword ("Insert Password: ");
+
+            return new Entities.Client (username, password);
+        }
+
+        private object[] BuildRequest (Command command, params object[] payload) {
+            List<object> request = new List<object> (payload);
+            request.Insert (0, command.GetHashCode ());
+            request.Insert (1, clientToken);
+
+            return request.ToArray ();
+        }
+
+    }
+
+}
